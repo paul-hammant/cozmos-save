@@ -1,0 +1,14 @@
+1).  Don't convert WikiWords inside HTML pre tags
+     a).  Spike SiteMesh Parser which stops further processing inside HTML pre tags
+3).  Parameterize build.xml
+4).  Pull javac task into macro in build.xml
+6).  Implement prettier decorator
+7).  Automatic build numbers in build.xml
+8).  Investigate Maven war overlays
+
+9).  Force http mode to be web only, with https mode for web+dav / block editi initiation on http side.
+10)  (related) get HTTP authentication going for PUT and othe DAV operations, but not for GET and POST (web)
+11)  (related) allow for HTTP authentication to delegate to an LDAP server for access control (use OpenLDAP)
+
+12)  delegate DAV requests that are applicable thru to a Subversion server.
+13)  (related) cache requests for the HTTP side such that Sitemesh and or DAV are not forever procesing. Perhaps via if-modified-since

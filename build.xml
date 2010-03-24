@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<project name="cozmos" default="test">
+    <description>
+        Cozmos - a WebDAV-enabled wiki, or 'diki' or 'daviki'
+    </description>
+
+    <path id="compile.path">
+        <pathelement location="lib/servlet-api-2.4/servlet-api-2.4.jar"/>
+        <pathelement location="lib/sitemesh-2.3/sitemesh-2.3.jar"/>
+        <pathelement location="../cozmosSiteWar/WEB-INF/lib/freemarker-2.3.13.jar"/>
+        <pathelement location="lib/svnkit.jar"/>
+    </path>
+
+    <path id="compile.out">
+        <path refid="compile.path"/>
+        <pathelement location="target/classes"/>
+    </path>
+
+    <path id="test.compile.path">
+        <path refid="compile.out"/>
+        <pathelement location="lib/junit-3.8.2/junit-3.8.2.jar"/>
+    </path>
+
+    <path id="test.run.path">
+        <path refid="test.compile.path"/>
+        <pathelement location="target/test-classes"/>
+    </path>
+
+    <target name="clean">
+        <delete dir="target"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="target/classes"/>
+        <javac srcdir="src/main/java"
+               destdir="target/classes"
+               debug="on"
+               classpathref="compile.path"
+               source="1.4"
+               target="1.4"
+                />
+    </target>
+
+    <target name="jar" depends="compile, test">
+        <jar destfile="target/cozmos-servlet-SNAPSHOT.jar"
+             basedir="target/classes"/>
+    </target>
+
+    <target name="war" depends="jar">
+
+        <mkdir dir="target/dist"/>
+
+        <war destfile="target/dist/cozmos-standalone-SNAPSHOT.war"
+             webxml="src/main/resources/WEB-INF/web-standalone.xml">
+            <lib dir="target">
+                <include name="cozmos-servlet-SNAPSHOT.jar"/>
+            </lib>
+            <lib dir="lib/sitemesh-2.3">
+                <include name="sitemesh-2.3.jar"/>
+            </lib>
+            <lib dir="lib/webdav-servlet-2.0">
+                <include name="webdav-servlet-2.0.jar"/>
+            </lib>
+            <webinf dir="src/main/resources/WEB-INF" excludes="web*.xml"/>
+            <fileset dir="../cozmosSiteContent/">
+                <exclude name="downloads/**"/>
+            </fileset>
+        </war>
+
+        <war destfile="target/dist/cozmos-mod_dav_svn-SNAPSHOT.war"
+             webxml="src/main/resources/WEB-INF/web-depends-on-subversion.xml">
+            <lib dir="target">
+                <include name="cozmos-servlet-SNAPSHOT.jar"/>
+            </lib>
+            <lib dir="lib/sitemesh-2.3">
+                <include name="sitemesh-2.3.jar"/>
+            </lib>
+            <webinf dir="src/main/resources/WEB-INF" includes="sitemesh.xml"/>
+            <fileset dir="src/main/resources">
+                <exclude name="WEB-INF/**"/>
+            </fileset>
+            <zipfileset dir="src/main/resources"
+                        includes="WEB-INF/jetty-web-cozmos.xml"
+                        fullpath="WEB-INF/jetty-web.xml"/>            
+        </war>
+
+        <war destfile="target/dist/cozmos-svnkit-SNAPSHOT.war"
+             webxml="src/main/resources/WEB-INF/web-via-svnkit.xml">
+            <lib dir="target">
+                <include name="cozmos-servlet-SNAPSHOT.jar"/>
+            </lib>
+            <lib dir="lib/sitemesh-2.3">
+                <include name="sitemesh-2.3.jar"/>
+            </lib>
+            <lib dir="lib">
+                <include name="svnkit.jar"/>
+            </lib>
+            <webinf dir="src/main/resources/WEB-INF" excludes="web*.xml"/>
+            <fileset dir="src/main/resources">
+                <exclude name="WEB-INF/**"/>
+            </fileset>
+        </war>
+
+
+    </target>
+
+    <target name="release-src">
+        <zip destfile="target/dist/${ant.project.name}-src-SNAPSHOT.zip">
+            <fileset dir="." excludes="target/**,.classes-ide/**"/>
+        </zip>
+    </target>
+
+    <target name="test-compile">
+        <mkdir dir="target/test-classes"/>
+        <javac srcdir="src/test/java"
+               destdir="target/test-classes"
+               debug="on"
+               classpathref="test.compile.path"
+               source="1.4"
+               target="1.4"
+                />
+    </target>
+
+    <target name="test" depends="test-compile">
+        <mkdir dir="target/test-results"/>
+        <junit haltonfailure="yes" fork="no" printsummary="no">
+            <classpath refid="test.run.path"/>
+
+            <formatter type="brief" usefile="no"/>
+            <formatter type="xml" usefile="yes"/>
+
+            <batchtest fork="no" todir="target/test-results">
+                <fileset dir="src/test/java">
+                    <include name="**/*Test*.java"/>
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+
+    <target name="test-report" depends="test">
+        <mkdir dir="target/test-report"/>
+        <junitreport todir="target/test-report">
+            <fileset dir="target/test-results">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="target/test-report/html"/>
+        </junitreport>
+    </target>
+
+    <target name="deploy" depends="war">
+
+        <copy todir="../cozmosSiteContent/downloads">
+            <fileset dir="target/dist">
+                <include name="*.war"/>
+            </fileset>
+        </copy>
+        
+        <zip destfile="../cozmosSiteContent/downloads/cozmos-content-SNAPSHOT.zip">
+            <fileset dir="../cozmosSiteContent/">
+                <exclude name="downloads/**"/>
+            </fileset>
+        </zip>
+
+    </target>
+
+
+
+</project>
