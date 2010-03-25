@@ -8,6 +8,7 @@
 	<modules>
 		<module>jar</module>
 		<module>oldWar</module>
+		<module>appengineWar</module>
 	</modules>
 	<organization>
 		<name>Codehaus</name>
