@@ -25,8 +25,7 @@
                 <configuration>
                     <webResources>
                         <resource>
-                            <!-- this is relative to the pom.xml directory -->
-                            <directory>../cosmosSiteContent</directory>
+                            <directory>../cozmosSiteContent</directory>
                         </resource>
                     </webResources>
                 </configuration>
