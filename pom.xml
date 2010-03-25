@@ -1,0 +1,51 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>cozmos</groupId>
+	<artifactId>cozmos-parent</artifactId>
+	<name>Cozmos Parent</name>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<modules>
+		<module>jar</module>
+	</modules>
+	<organization>
+		<name>Codehaus</name>
+		<url>http://codehaus.org/</url>
+	</organization>
+	<inceptionYear>2003</inceptionYear>
+	<description>Cozmos is a CMS</description>
+	<issueManagement>
+		<system>JIRA</system>
+		<url>http://jira.codehaus.org/browse/?</url>
+	</issueManagement>
+	<distributionManagement>
+		<repository>
+			<id>codehaus.org</id>
+			<name>Codehaus PicoContainer Repository</name>
+			<url>dav:https://dav.codehaus.org/repository/picocontainer/</url>
+		</repository>
+		<snapshotRepository>
+			<id>codehaus.org</id>
+			<name>Codehaus PicoContainer Snapshot Repository</name>
+			<url>dav:https://dav.codehaus.org/snapshots.repository/picocontainer/</url>
+		</snapshotRepository>
+	</distributionManagement>
+	<profiles>
+		<profile>
+			<!--Use Codehaus Repositories-->
+			<id>codehaus</id>
+			<repositories>
+				<repository>
+					<id>Codehaus</id>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+					<url>http://repository.codehaus.org/</url>
+				</repository>
+			</repositories>
+		</profile>
+	</profiles>
+</project>
