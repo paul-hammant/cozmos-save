@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Iterator;
 
-public class SvnKitProxyServlet extends HttpServlet {
+public class GetsViaSvnkitCozmosServlet extends HttpServlet {
 
     private String svnUrl;
     private String newPageTemplate;

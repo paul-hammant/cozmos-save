@@ -28,7 +28,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class ModDavSvnProxyServlet extends HttpServlet {
+public class OldGetsViaModDavSvnCozmosServlet extends HttpServlet {
 
     private String targetURL;
     private String newPageTemplate;

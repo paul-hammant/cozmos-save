@@ -32,7 +32,7 @@ import java.net.Socket;
 import java.net.URL;
 import java.util.StringTokenizer;
 
-public class ModDavSvnProxyServlet2 extends HttpServlet {
+public class GetsViaModDavSvnCozmosServlet extends HttpServlet {
 
     private String targetURL;
     private String newPageTemplate;
