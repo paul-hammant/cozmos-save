@@ -29,6 +29,7 @@
             <param-value>index.html</param-value>
         </init-param>
     </servlet>
+
     <servlet>
 	    <servlet-name>freemarkerDecorator</servlet-name>
         <servlet-class>com.thoughtworks.cozmos.sitemesh.FreeMarkerDecorator</servlet-class>
