@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head profile="http://www.w3.org/2000/08/w3c-synd/#">
+
+  
+  <title>Quick Start</title>
+</head>
+
+
+<body>
+
+<h1>Quick Start</h1>
+
+Wanting to mount your own server ?&nbsp; Read on.<br />
+
+<br />
+
+Wanting to edit pages in a pre-exiting Cozmos server ? Read [review
+your setup]<br />
+
+<br />
+
+Alternatively you may want to [customize your Cozmos install].
+<br />
+
+<h2>Prerequisite skills and server setup</h2>
+
+You should be able to install the Java Development Kit and Java web
+containers as well as modestly configure mod_dav_svn.<br />
+
+<br />
+
+Its best to use a version of Linux that has Apache pre-installed and
+mod_sav_svn installed giving a working https capability for regular
+Subversion.<br />
+
+<h2>Install the Cozmos web app into Apache's Tomcat server</h2>
+
+<span style="text-decoration: underline;">Alpha verions</span> of
+Cozmos available here <a href="downloads/cozmos-standalone-SNAPSHOT.war">here</a> (for the
+standalone version of Cozmos) and <a href="downloads/cozmos-depends-on-subversion-SNAPSHOT.war">here</a>
+for the version that stores content in Subversion.&nbsp; For the latter,
+you'll need to pre-populate your Subversion content root with some <a href="downloads/cozmos-content-SNAPSHOT.zip">content</a>.
+All of these archives are pretty small.<br />
+<br />
+
+If you are using the standalone version and want to serve using
+Mortbay's <a href="http://www.mortbay.org/">Jetty</a> web server, it
+will work as well as Tomcat, but you
+must&nbsp; have JETTY_HOME as an enviromental variable set in order for
+the content to be stored
+after the web server is bought down.<br />
+
+<br />
+
+If you are using the Subversion depending version, you need to work on
+the web.xml in WEB-INF inside the WAR file.&nbsp; There's a URL there (that
+must end in a slash, but is marked with "TODO" as shipped) that points
+to the mod_dav_svn (https://) entry point that you're planning to store
+content in.&nbsp; You will need to push content into there before you
+launch the web container.&nbsp; You will also need to have turned
+autorevisioning on for mod_dav_svn.<br />
+<br />
+
+</body>
+</html>

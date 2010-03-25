@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head profile="http://www.w3.org/2000/08/w3c-synd/#">
+
+  
+  <meta content="text/html;charset=ISO-8859-1" http-equiv="Content-Type" />
+
+
+
+  
+  
+  
+  <title>Hacking SeaMonkey</title>
+</head>
+
+
+<body>
+<div>
+<p></p>
+</div>
+
+
+
+<h1>Hacking SeaMonkey</h1>
+
+
+This is really only something for the very technical and very enthusiastic.<br />
+
+
+<br />
+
+
+It is likely to be something that people who use SeaMonkey every day
+want to do. Most people will use Firefox with our [Firefox extension]
+though.<br />
+
+
+<h2>For SeaMonkey editing, download and patch it <br />
+
+
+
+</h2>
+
+
+
+1) Go get a recent version of <a href="http://www.mozilla.org/projects/seamonkey/">SeaMonkey</a><br />
+
+
+
+<br />
+
+
+
+Unfortunately, you have to make a modification to SeaMonkey after
+installing it.<br />
+
+
+
+<br />
+
+
+
+2) Install it the normal way.<br />
+
+
+
+<br />
+
+
+
+3) Go to to a directory called 'chrome' that contains a file called
+'comm.jar' in a command shell<br />
+
+
+
+<br />
+
+
+
+4) Do jar -xf comm.jar content/editor/editorApplicationOverlay.js<br />
+
+
+
+<br />
+
+
+
+5) Edit that file in Notepad, Textpad, Vi, Emacs etc..<br />
+
+
+
+<br />
+
+
+
+6) Change ....<br />
+
+
+
+<pre>&nbsp; function editPage(url, launchWindow, delay)<br />&nbsp; {<br />&nbsp; // Always strip off "view-source:" and #anchors<br />&nbsp; url = url.replace(/^view-source:/, "").replace(/#.*/, "");</pre>
+
+
+
+&nbsp; to ....<br />
+
+
+
+<br />
+
+
+
+<pre>&nbsp; function editPage(url, launchWindow, delay)<br />  {<br />&nbsp; // Always strip off "view-source:" and #anchors<br />&nbsp; url = url.replace(/^view-source:/, "").replace(/#.*/, "");<br />&nbsp; if (url.substr(0,4) == "http")<br />&nbsp; {<br />&nbsp;&nbsp;&nbsp; if (url.indexOf("?") &gt; 0)<br />&nbsp;&nbsp;&nbsp; {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; url = url + "&amp;editMode=true";&nbsp;&nbsp; <br />&nbsp;&nbsp;&nbsp; }<br />&nbsp;&nbsp;&nbsp; else<br />&nbsp;&nbsp;&nbsp; {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; url = url + "?editMode=true";&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br />&nbsp;&nbsp;&nbsp; }<br />&nbsp; }</pre>
+
+
+
+<br />
+
+
+
+7) Do jar -uf comm.jar content/editor/editorApplicationOverlay.js<br />
+
+
+
+<br />
+
+
+
+Now your SeaMonkey has been modified. It allows the server side Cozmos
+to recognise the differences betweeen a page request from the browser
+and one from the composer (editor) sides of SeaMonkey.&nbsp; We hope to
+see the SeaMonkey team build in such functionality in future.<br />
+
+
+
+<br />
+
+
+
+It is important to note that there are no permissions presently for
+editing of pages.&nbsp; This will change in future versions of Cozmos.<br />
+
+
+
+<br />
+
+
+We will supply a script to modify SeaMonkey for you in future versions.
+&nbsp;Or the SeaMonkey team will allow server applications to
+differentiate between requests for the browser component and those for
+the editor component.<br />
+
+
+
+<h2>Edit a page on the site with SeaMonkey</h2>
+
+
+
+While browsing the Cozmos based site with SeaMonkey, hit Ctrl-E (Apple-E for
+Mac users) and make changes to the page.&nbsp; Hit the "Publish"&nbsp;
+icon in the toolbar to push the changes back to the server.<br />
+
+
+
+<br />
+
+
+
+</body>
+</html>

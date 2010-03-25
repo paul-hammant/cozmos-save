@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head profile="http://www.w3.org/2000/08/w3c-synd/#">
+
+  
+  <meta content="text/html;charset=ISO-8859-1" http-equiv="Content-Type" />
+
+
+
+  
+  
+  
+  <title>Offline editing</title>
+</head>
+
+
+<body>
+
+
+
+<h1>Prerequisite Skills</h1>
+
+You should adept with <a href="http://subversion.tigris.org/">Subversion</a> and <a href="http://en.wikipedia.org/wiki/Revision_control">revision control</a> practices. &nbsp;You may happier with <a href="http://tortoisesvn.tigris.org/">TortoiseSvn</a> or something built into your Intedgrated Development Environment. &nbsp;<br />
+
+<br />
+
+It is most likely that you are a software developer, or web design
+professional. &nbsp;At the very least you're a 'end user' who has been
+given a crash course in basic Subversion usage.<br />
+
+<br />
+
+You might anyway want to reaquaint yourself via a <a href="http://www.abbeyworkshop.com/howto/misc/svn01/">Subversion cheetsheet</a> or buy a <a href="http://www.pragmaticprogrammer.com/titles/svn/">good book on subversion</a>.<br />
+
+<h1>Getting the page content offline.</h1>
+
+Do a checkout of the source using normal svn tools. &nbsp;For Cozmos' own site that would be:<br />
+
+<br />
+
+&nbsp; svn co https://svn.codehaus.org/cozmos/cozmosSiteContent/<br />
+
+<br />
+
+You should not need a user account and password to checkout, but you may well need one to push back.<br />
+
+<br />
+
+Then choose your tool for editing (see below).<br />
+
+<br />
+
+After you've made you changes you can push the whole set of changes
+back to the subversion server (and the live Cozmos site implicitly)
+with a subversion commit.<br />
+
+<br />
+
+&nbsp; svn commit -m "a suitable description for the changes"<br />
+
+<h2>Reverting changes.</h2>
+
+You mean one of two things here :-<br />
+
+<br />
+
+Abandoning a change before you commit it:<br />
+
+<br />
+
+&nbsp; svn revert FileName.html<br />
+
+<br />
+
+Undoing a change that has already been made:<br />
+
+<br />
+
+&nbsp; svn merge -r 124:121 FileName.html<br />
+
+&nbsp; svn commit FileName.html -m "ooops - undo new press release as not ready to go live yet"<br />
+<br />
+The two numbers are the latest revision and the one your trying to go back to.<br />
+
+<h1>Cross Platform WYSIWYG tools</h1>
+
+<a href="http://www.adobe.com/products/dreamweaver/">DreamWeaver</a><br />
+
+<br />
+
+<a href="http://www.nvu.com/index.php">NVU</a> (make a site in Site Manager and point it to the root diectory for the content)<br />
+
+<br />
+
+Cross platform tools&nbsp;(non-WYSIWYG)<br />
+
+<br />
+
+<a href="http://www.jetbrains.com/idea/">Intellij IDEA</a> (this is the best Java IDE)<br />
+
+<a href="http://www.eclipse.org/">Eclipse</a><br />
+
+<a href="http://www.eclipse.org/">Netbeans<br />
+
+</a><br />
+
+Unix based operating systems (non-WYSIWYG)<br />
+
+<br />
+
+Vi and Emacs are ususally built in.<br />
+
+<br />
+
+Windows (non-WYSIWYG)<br />
+
+<br />
+
+<a href="http://www.textpad.com/">TextPad</a><br />
+
+<a href="http://notepad-plus.sourceforge.net">NotePad++</a><br />
+
+<br />
+
+Mac OS X<br />
+
+<br />
+
+<a href="http://macromates.com/">TextMate<br />
+
+</a>
+
+</body>
+</html>

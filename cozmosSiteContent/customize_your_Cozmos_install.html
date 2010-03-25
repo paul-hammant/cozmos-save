@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+    
+  <title>Customizing your Cozmos installation</title>
+</head>
+
+
+<body>
+
+<br>
+
+This section is for the technical as it concerns setting up Cozmos rather than using it.
+<h3>Two Modes</h3>
+
+It is important to know that Cozmos has two modes of operation:
+<ul>
+
+    <li>
+        The first is 'standalone'.<br>
+
+        This means that Cozmos runs entirely within a servlet container on its own.
+        Each time a page is edited and there is no history retained for each previous revision.
+    </li>
+
+    <li>The second is in conjunction with a Subversion repository.<br>
+
+        It allows for history to be kept (allowing auditing and rollback).
+        It also allows for offline editing, though perhaps only for the technical amongst us.
+    </li>
+
+</ul>
+
+<h3>Understanding Sitemesh</h3>
+
+Once you've read about <a href="http://www.opensymphony.com/sitemesh/">Sitemesh</a> which is key to Cozmos you
+may want to edit the Cozmos Site decorator. It is in the war file in a folder called 'decorators'.
+You can't edit it over WebDAV unfortunately. Simply put Sitemesh transforms all pages presented.
+At the broadest level it adds a standard header, left edge and footer to each page.<br>
+
+<br>
+
+Sitemesh also applies a default style to all pages decorated. The CSS style is inlined in the decorator.
+the default decorator refers to some images that are in '/style/images/' if you are interested.
+Changing the style should be quite easy for a web developer.
+Any CSS based design sould do.<br>
+
+<h3>Cozmos Default Look and feel</h3>
+
+The default style used for this Cozmos, is available on the internet separately.
+Originally found at <a href="http://karenblundell.com/templates/Natural_Fluidity/index.html">http://karenblundell.com/templates/Natural_Fluidity/index.html</a>
+it was modified by another at <a href="http://www.oswd.org/design/preview/id/2959">http://www.oswd.org/design/preview/id/2959</a> which is the version we have used.<br>
+
+<br>
+
+The default decorator adds 'tabs' to the top of each page.
+As shipped with Cozmos, they are pretty pointless, but they could link to something meaningful.
+Tabs like 'products' 'services' and 'contact us' are quite usual.
+Similarly, the links in the footer might nor be to your taste so should be replaced.
+<br>
+
+</body>
+</html>
